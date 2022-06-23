@@ -12,7 +12,7 @@ const host = process.env.HOST || "http://localhost";
 const port = process.env.PORT || 3001;
 
 app.use(cors());
-app.use("/", express.static(path.resolve(__dirname + "/public")));
+app.get("/", express.static(path.resolve(__dirname + "/public")));
 app.use("/api", router);
 app.use(errorHandlingMiddleware);
 
