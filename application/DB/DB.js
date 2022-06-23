@@ -1,15 +1,10 @@
 const { Client } = require("pg");
 const backup = require("./backup");
+const dbConfig = require("./config");
 
 class DB {
-	constructor() {
-		this.client = new Client({
-			user: process.env.DB_USER,
-			host: process.env.DB_HOST,
-			database: process.env.DB_NAME, //'anime_recommendations',
-			password: process.env.DB_PASSWORD,
-			port: Number(process.env.DB_PORT),
-		});
+	constructor(config) {
+		this.client = new Client(config);
 	}
 
 	async init() {
@@ -29,4 +24,4 @@ class DB {
 	}
 }
 
-module.exports = DB;
+module.exports = new DB(dbConfig);

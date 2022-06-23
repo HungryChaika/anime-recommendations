@@ -2,7 +2,7 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
-const DB = require("./application/DB/DB");
+const db = require("./application/DB/DB");
 const router = require("./routes/index");
 const errorHandlingMiddleware = require("./middlewares/errorHandlingMiddleware");
 
@@ -10,8 +10,6 @@ const app = express();
 
 const host = process.env.HOST || "http://localhost";
 const port = process.env.PORT || 3001;
-
-const db = new DB();
 
 app.use(cors());
 app.use("/", express.static(path.resolve(__dirname + "/public")));
