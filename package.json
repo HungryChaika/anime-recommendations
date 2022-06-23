@@ -1,17 +1,11 @@
 {
-  "name": "back-end",
-  "version": "1.0.0",
-  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "name": "anime-recommendation-back-end",
+  "version": "0.1.0",
+  "description": "Anime recommendation system (server)",
+  "private": true,
   "main": "app.js",
-  "dependencies": {
-    "express": "^4.18.1",
-    "nodemon": "^2.0.16",
-    "pg": "^8.7.3"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+  "engines": {
+    "node": ">=16.0.0"
   },
   "repository": {
     "type": "git",
@@ -22,5 +16,29 @@
   "bugs": {
     "url": "https://github.com/HungryChaika/anime-recommendations-back-end/issues"
   },
-  "homepage": "https://github.com/HungryChaika/anime-recommendations-back-end#readme"
+  "homepage": "https://github.com/HungryChaika/anime-recommendations-back-end#readme",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon",
+    "format": "prettier --write '**/*.{js}'"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1",
+    "husky": "^8.0.0",
+    "nodemon": "^2.0.16",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "./*.js"
+    ],
+    "ext": ".js",
+    "ignore": [],
+    "exec": "npm run start"
+  }
 }

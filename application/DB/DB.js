@@ -1,19 +1,16 @@
-const { Client } = require('pg'); 
+const { Client } = require("pg");
 
 class DB {
-    constructor() {
-        const client = new Client({ 
-            user: 'postgres', 
-            host: 'localhost', 
-            database: 'test_tb',//'anime_recommendations', 
-            password: 'postgres', 
-            port: 5432, 
-        }); 
-        client.connect(); 
-    }
-
-
-
-};
+  constructor() {
+    const client = new Client({
+      user: process.env.DB_USER,
+      host: process.env.DB_HOST,
+      database: process.env.DB_NAME, //'anime_recommendations',
+      password: process.env.DB_PASSWORD,
+      port: Number(process.env.DB_PORT),
+    });
+    client.connect();
+  }
+}
 
 module.exports = DB;
