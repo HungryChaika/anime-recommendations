@@ -1,15 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const http = require('http');
-const app = new express();
-const server = http.createServer(app);
+const path = require("path");
+const express = require("express");
 
-const host = 'http://localhost';
+const app = new express();
+
+const host = "http://localhost";
 const port = 3001;
 
-app.use(
-    bodyParser.urlencoded({ extended: false }),
-    express.static(__dirname + '/public'),
-);
+app.use("/", express.static(path.resolve(__dirname + "/public")));
 
-server.listen(port, () => console.log(`Server running at port ${port}. ${host}:${port}`));
+app.listen(port, () =>
+  console.log(`Server running at port ${port}. ${host}:${port}`)
+);
