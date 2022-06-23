@@ -36,7 +36,7 @@
   },
   "nodemonConfig": {
     "watch": [
-      "./*.js"
+      "*.js"
     ],
     "ext": ".js",
     "ignore": [],
