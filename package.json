@@ -1,0 +1,25 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HungryChaika/anime-recommendations-back-end.git"
+  },
+  "author": "HungryChaika",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HungryChaika/anime-recommendations-back-end/issues"
+  },
+  "homepage": "https://github.com/HungryChaika/anime-recommendations-back-end#readme"
+}
