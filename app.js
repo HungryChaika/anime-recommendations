@@ -1,10 +1,11 @@
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
 
 const app = new express();
 
-const host = "http://localhost";
-const port = 3001;
+const host = process.env.HOST || "http://localhost";
+const port = process.env.PORT || 3001;
 
 app.use("/", express.static(path.resolve(__dirname + "/public")));
 
