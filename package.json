@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/HungryChaika/anime-recommendations-back-end#readme",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon",
+    "start": "concurrently \"node app.js\" \"npm run start --prefix ./client\"",
+    "dev": "concurrently \"nodemon app.js\" \"npm run start --prefix ./client\"",
     "format": "prettier --write '**/*.{js}'"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
+    "concurrently": "^7.2.2",
     "dotenv": "^16.0.1",
     "husky": "^8.0.0",
     "nodemon": "^2.0.16",
@@ -39,7 +40,9 @@
       "*.js"
     ],
     "ext": ".js",
-    "ignore": ["./client"],
+    "ignore": [
+      "./client"
+    ],
     "exec": "npm run start"
   }
 }
