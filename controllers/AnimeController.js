@@ -1,12 +1,19 @@
-const DB = require("../application/DB/DB");
+const AnimeModel = require("../application/DB/models/AnimeModel");
 
 class AnimeController {
 	async getAll(req, res) {
-		return res.json({ message: "All anime" });
+		const { page = 1, limit = 10 } = req.query;
+		const animes = await AnimeModel.findAndCountAll(
+			limit,
+			limit * page - limit
+		);
+		return res.json(animes);
 	}
 
 	async getById(req, res) {
-		return res.json({ message: `Anime with id: ${req.params.id}` });
+		const { id } = req.params;
+		const anime = await AnimeModel.findById(id);
+		return res.json(anime);
 	}
 }
 
