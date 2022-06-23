@@ -3,6 +3,8 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const DB = require("./application/DB/DB");
+const router = require("./routes/index");
+const errorHandlingMiddleware = require("./middlewares/errorHandlingMiddleware");
 
 const app = express();
 
@@ -13,10 +15,8 @@ const db = new DB();
 
 app.use(cors());
 app.use("/", express.static(path.resolve(__dirname + "/public")));
-
-app.get("/", (req, res) => {
-	res.status(200).send("Hello World!");
-});
+app.use("/api", router);
+app.use(errorHandlingMiddleware);
 
 const start = async () => {
 	try {
