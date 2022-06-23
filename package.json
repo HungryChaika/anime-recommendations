@@ -41,7 +41,7 @@
     ],
     "ext": ".js",
     "ignore": [
-      "./client"
+      "client/*"
     ],
     "exec": "npm run start"
   }
