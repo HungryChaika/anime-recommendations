@@ -49,7 +49,7 @@ const backup = async (filename, client) => {
 							Number(jsonAnime[i].age_rating?.split("+")?.[0]) || null,
 							jsonAnime[i].duration || null,
 							jsonAnime[i].description || null,
-							jsonAnime[i].image_url || null,
+							jsonAnime[i].imageUrl || null,
 						]
 					);
 				}
