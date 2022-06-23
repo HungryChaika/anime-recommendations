@@ -19,7 +19,7 @@ class AnimeModel {
 		const allRowsResult = await this.client.query("SELECT COUNT(*) FROM anime");
 		return {
 			rows: animeResult.rows,
-			count: Number(allRowsResult.rows[0].count),
+			totalCount: Number(allRowsResult.rows[0].count),
 		};
 	}
 }
