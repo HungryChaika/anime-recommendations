@@ -11,16 +11,12 @@ const config = {
 const db_name_to_create = process.env.DB_TO_BE_CREATED;
 
 const createDB = async () => {
-
     const client = new Client(config);
     try {
         await client.connect();
     } catch (e) {
         console.log(e);
     };
-
-    //await client.connect('postgres://' + db_user + ':' + db_password + '@' + host + '/postgres', 
-    
     await client.query('CREATE DATABASE ' + db_name_to_create);
     client.end();
 }
