@@ -10,7 +10,7 @@ const Anime = observer(() => {
 	const { anime } = useContext(Context);
 
 	useEffect(() => {
-		fetchAllAnime(1, 10, null, null, null).then((data) => {
+		fetchAllAnime(anime.page, anime.limit, null, null, null).then((data) => {
 			anime.setAnimeList(data.rows);
 			anime.setTotalCount(data.totalCount);
 		});
@@ -37,9 +37,8 @@ const Anime = observer(() => {
 	return (
 		<Container>
 			<Row className="mt-2">
-				{/*<Col md={3}> <TypeBar /> </Col>*/}
-				<Col>
-					{/* <BrandBar /> */}
+				<Col md={3}></Col>
+				<Col md={9}>
 					<AnimeList />
 					<Pages />
 				</Col>
