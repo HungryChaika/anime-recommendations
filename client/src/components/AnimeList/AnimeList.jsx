@@ -10,7 +10,7 @@ const AnimeList = observer(() => {
 	return (
 		<Row className="d-flex">
 			{anime.animeList.map((anime) => (
-				<AnimeCard key={anime.id} anime={anime} />
+				<AnimeCard className="mt-2" key={anime.id} anime={anime} />
 			))}
 		</Row>
 	);
