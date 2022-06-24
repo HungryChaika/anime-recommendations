@@ -20,7 +20,7 @@ app.use(errorHandlingMiddleware);
 const start = async () => {
 	try {
 		await db.init();
-		await db.backup(path.resolve(__dirname, "./data/anime.json"));
+		await db.backup(path.resolve(__dirname, "./data/anime-info.json"));
 		app.listen(port, () =>
 			console.log(`Server running at port ${port}. ${host}:${port}`)
 		);
