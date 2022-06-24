@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import AnimeList from "../components/AnimeList/AnimeList";
 import { fetchAllAnime } from "../http/animeAPI";
 import { Context } from "../index";
@@ -13,6 +13,15 @@ const Anime = observer(() => {
 		fetchAllAnime(anime.page, anime.limit, null, null, null).then((data) => {
 			anime.setAnimeList(data.rows);
 			anime.setTotalCount(data.totalCount);
+			anime.setSelectedReleaseDateMin(
+				data.rows.reduce(
+					(earliestDate, anime) =>
+						new Date(anime.release_date || new Date()) < earliestDate
+							? new Date(anime.release_date)
+							: earliestDate,
+					new Date()
+				)
+			);
 		});
 	}, []);
 
@@ -37,7 +46,38 @@ const Anime = observer(() => {
 	return (
 		<Container>
 			<Row className="mt-2">
-				<Col md={3}></Col>
+				<Col md={3}>
+					<Form>
+						<Form.Group className="mb-3" controlId="formBasicStartDate">
+							<Form.Label>Дата выхода с</Form.Label>
+							<Form.Control
+								type="date"
+								value={anime.selectedReleaseDateMin.toISOString().split("T")[0]}
+								onChange={(e) =>
+									anime.setSelectedReleaseDateMin(e.target.value)
+								}
+							/>
+						</Form.Group>
+						<Form.Group className="mb-3" controlId="formBasicEndDate">
+							<Form.Label>Дата выхода до</Form.Label>
+							<Form.Control
+								type="date"
+								value={anime.selectedReleaseDateMax.toISOString().split("T")[0]}
+								onChange={(e) =>
+									anime.setSelectedReleaseDateMax(e.target.value)
+								}
+							/>
+						</Form.Group>
+						<Form.Group className="mb-3" controlId="formBasicGenre">
+							<Form.Label>Жанр</Form.Label>
+							<Form.Control
+								type="text"
+								value={anime.selectedGenre}
+								onChange={(e) => anime.setSelectedGenre(e.target.value)}
+							/>
+						</Form.Group>
+					</Form>
+				</Col>
 				<Col md={9}>
 					<AnimeList />
 					<Pages />
