@@ -2,11 +2,22 @@ const AnimeModel = require("../application/DB/models/AnimeModel");
 
 class AnimeController {
 	async getAll(req, res) {
-		const { page = 1, limit = 10 } = req.query;
-		const animes = await AnimeModel.findAndCountAll(
-			limit,
-			limit * page - limit
-		);
+		const {
+			page = 1,
+			limit = 10,
+			genre,
+			releaseDateMin,
+			releaseDateMax,
+		} = req.query;
+		const offset = (page - 1) * limit;
+		const animes = await AnimeModel.findAndCountAll({
+			limit: Number(limit),
+			offset,
+			where:
+				genre || releaseDateMin || releaseDateMax
+					? { genre, releaseDateMin, releaseDateMax }
+					: null,
+		});
 		return res.json(animes);
 	}
 
