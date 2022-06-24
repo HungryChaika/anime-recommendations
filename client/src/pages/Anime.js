@@ -4,6 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import AnimeList from "../components/AnimeList/AnimeList";
 import { fetchAllAnime } from "../http/animeAPI";
 import { Context } from "../index";
+import Pages from "../components/Pages";
 
 const Anime = observer(() => {
 	const { anime } = useContext(Context);
@@ -36,11 +37,11 @@ const Anime = observer(() => {
 	return (
 		<Container>
 			<Row className="mt-2">
-				<Col md={3}>{/* <TypeBar /> */}</Col>
-				<Col md={9}>
+				{/*<Col md={3}> <TypeBar /> </Col>*/}
+				<Col>
 					{/* <BrandBar /> */}
 					<AnimeList />
-					{/* <Pages /> */}
+					<Pages />
 				</Col>
 			</Row>
 		</Container>

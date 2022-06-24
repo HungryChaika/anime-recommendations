@@ -5,6 +5,7 @@ const cors = require("cors");
 const db = require("./application/DB/DB");
 const router = require("./routes/index");
 const errorHandlingMiddleware = require("./middlewares/errorHandlingMiddleware");
+const createDB = require("./application/DB/createDB");
 
 const app = express();
 
@@ -19,8 +20,9 @@ app.use(errorHandlingMiddleware);
 
 const start = async () => {
 	try {
+		//await createDB();
 		await db.init();
-		await db.backup(path.resolve(__dirname, "./data/anime.json"));
+		await db.backup(path.resolve(__dirname, "./data/anime-info.json"));
 		app.listen(port, () =>
 			console.log(`Server running at port ${port}. ${host}:${port}`)
 		);
