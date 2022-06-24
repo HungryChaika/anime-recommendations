@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import AnimeList from "../components/AnimeList/AnimeList";
 import { fetchAllAnime } from "../http/animeAPI";
 import { Context } from "../index";
@@ -22,6 +22,7 @@ const Anime = observer(() => {
 					new Date()
 				)
 			);
+			anime.setSelectedReleaseDateMax(new Date());
 		});
 	}, []);
 
@@ -36,12 +37,21 @@ const Anime = observer(() => {
 			anime.setAnimeList(data.rows);
 			anime.setTotalCount(data.totalCount);
 		});
-	}, [
-		anime.page,
-		anime.selectedGenre,
-		anime.selectedReleaseDateMin,
-		anime.selectedReleaseDateMax,
-	]);
+	}, [anime.page]);
+
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
+		fetchAllAnime(
+			anime.page,
+			anime.limit,
+			anime.selectedGenre,
+			anime.selectedReleaseDateMin,
+			anime.selectedReleaseDateMax
+		).then((data) => {
+			anime.setAnimeList(data.rows);
+			anime.setTotalCount(data.totalCount);
+		});
+	};
 
 	return (
 		<Container>
@@ -52,9 +62,12 @@ const Anime = observer(() => {
 							<Form.Label>Дата выхода с</Form.Label>
 							<Form.Control
 								type="date"
-								value={anime.selectedReleaseDateMin.toISOString().split("T")[0]}
+								value={
+									anime.selectedReleaseDateMin?.toISOString().split("T")[0] ||
+									""
+								}
 								onChange={(e) =>
-									anime.setSelectedReleaseDateMin(e.target.value)
+									anime.setSelectedReleaseDateMin(new Date(e.target.value))
 								}
 							/>
 						</Form.Group>
@@ -62,9 +75,12 @@ const Anime = observer(() => {
 							<Form.Label>Дата выхода до</Form.Label>
 							<Form.Control
 								type="date"
-								value={anime.selectedReleaseDateMax.toISOString().split("T")[0]}
+								value={
+									anime.selectedReleaseDateMax?.toISOString().split("T")[0] ||
+									""
+								}
 								onChange={(e) =>
-									anime.setSelectedReleaseDateMax(e.target.value)
+									anime.setSelectedReleaseDateMax(new Date(e.target.value))
 								}
 							/>
 						</Form.Group>
@@ -76,6 +92,13 @@ const Anime = observer(() => {
 								onChange={(e) => anime.setSelectedGenre(e.target.value)}
 							/>
 						</Form.Group>
+						<Button
+							variant="primary"
+							type="submit"
+							onClick={(e) => handleFormSubmit(e)}
+						>
+							Поиск
+						</Button>
 					</Form>
 				</Col>
 				<Col md={9}>

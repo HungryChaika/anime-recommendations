@@ -23,6 +23,7 @@ const AnimeCard = ({ anime }) => {
 				<Card.Text>
 					Дата выхода: {new Date(release_date).toDateString()}
 				</Card.Text>
+				<Card.Text>Жанры: {genres}</Card.Text>
 				<Card.Text>Описание: {description}</Card.Text>
 			</Card.Body>
 		</Card>

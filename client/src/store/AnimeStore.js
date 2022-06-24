@@ -4,8 +4,8 @@ export default class AnimeStore {
 	constructor() {
 		this._animeList = [];
 		this._selectedGenre = "";
-		this._selectedReleaseDateMin = new Date();
-		this._selectedReleaseDateMax = new Date();
+		this._selectedReleaseDateMin = null;
+		this._selectedReleaseDateMax = null;
 		this._page = 1;
 		this._limit = 10;
 		this._totalCount = 0;
