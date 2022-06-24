@@ -1,6 +1,5 @@
 import React from "react";
-import styles from "./AnimeCard.module.css";
-import { Card, Image } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const AnimeCard = ({ anime }) => {
 	const {
@@ -19,10 +18,12 @@ const AnimeCard = ({ anime }) => {
 	} = anime;
 	return (
 		<Card>
-			<Image width={250} height={350} src={image_url} />
 			<Card.Body>
 				<Card.Title>{title}</Card.Title>
-				<Card.Text>{description}</Card.Text>
+				<Card.Text>
+					Дата выхода: {new Date(release_date).toDateString()}
+				</Card.Text>
+				<Card.Text>Описание: {description}</Card.Text>
 			</Card.Body>
 		</Card>
 	);
