@@ -12,8 +12,9 @@ const host = process.env.HOST || "http://localhost";
 const port = process.env.PORT || 3001;
 
 app.use(cors());
-app.get("/", express.static(path.resolve(__dirname + "/public")));
 app.use("/api", router);
+app.get("/", express.static(path.resolve(__dirname, "/public")));
+app.use((req, res) => res.status(404).send("<h1>Not found</h1>"));
 app.use(errorHandlingMiddleware);
 
 const start = async () => {

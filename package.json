@@ -43,6 +43,6 @@
     "ignore": [
       "client/*"
     ],
-    "exec": "npm run start"
+    "exec": "node app.js"
   }
 }
