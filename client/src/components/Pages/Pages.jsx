@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Pagination } from "react-bootstrap";
 import { Context } from "../../index";
+import { observer } from "mobx-react-lite";
 
-const Pages = () => {
+const Pages = observer(() => {
 	const { anime } = useContext(Context);
 	const pageCount = Math.ceil(anime.totalCount / anime.limit);
 	const pages = [];
@@ -11,15 +12,12 @@ const Pages = () => {
 		pages.push(i);
 	}
 
-	console.log(anime.totalCount, anime.limit);
-
 	return (
 		<Pagination>
 			<Pagination.First onClick={() => anime.setPage(1)} />
 			<Pagination.Prev
 				onClick={() => anime.setPage(anime.page > 1 ? anime.page - 1 : 1)}
 			/>
-			{/*<Pagination.Ellipsis />*/}
 			{pages.map((page, i) => {
 				if (i - 4 <= anime.page && i + 6 >= anime.page) {
 					return (
@@ -33,7 +31,6 @@ const Pages = () => {
 					);
 				}
 			})}
-			{/*<Pagination.Ellipsis />*/}
 			<Pagination.Next
 				onClick={() =>
 					anime.setPage(anime.page < pageCount ? anime.page + 1 : pageCount)
@@ -42,6 +39,6 @@ const Pages = () => {
 			<Pagination.Last onClick={() => anime.setPage(pageCount)} />
 		</Pagination>
 	);
-};
+});
 
 export default Pages;
